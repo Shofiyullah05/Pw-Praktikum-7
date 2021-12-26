@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style1.css">
+    <title>Document</title>
+    
+
+  </head>
+
+  <body>
+    <div class="A">
+      <h1>Selamat Datang Di Indonesia</h1>
+      <input type="image" src="OIP.jpg" style width="480" height="300" />
+      
+      <script>
+        var ProvinsiKota= {
+          JawaTengah: ["Semarang", "Banyumas", "Solo", "Magelang", "Tegal", "Pekalongan"],
+          JawaTimur: ["Surabaya", "Malang", "Sidoarjo", "Blitar", "Pasuruan"],
+          JawaBarat: ["Cirebon", "Depok", "Cimahi", "Bogor", "Bekasi"],
+        };
+        window.onload = function () {
+          var typeSel = document.getElementById("typeSel"),
+            fieldSel = document.getElementById("fieldSel");
+          for (var type in ProvinsiKota) {
+            typeSel.options[typeSel.options.length] = new Option(type, type);
+          }
+          typeSel.onchange = function () {
+            fieldSel.length = 1;
+            if (this.selectedIndex < 1) return;
+              var ft = ProvinsiKota[this.value];
+            for (var field in ProvinsiKota[this.value]) {
+              fieldSel.options[fieldSel.options.length] = new Option( ft[field],field);
+            }
+          };
+          typeSel.onchange();
+        };
+        function submit() {
+          var typeSel = document.getElementById("typeSel").value,
+            fieldSel = document.getElementById("fieldSel").value,
+            hasil = document.getElementById("hasil");
+          console.log(typeSel, fieldSel);
+          hasil.innerText ="Pada Provinsi " +typeSel +" ada Kota " +ProvinsiKota[typeSel][fieldSel];
+        }
+        function myFunction() {
+          var element = document.body;
+          element.classList.toggle("dark-mode");
+        }
+      </script>
+
+      <br>
+      <select name="optone" id="typeSel" size="1">
+        <option value="" selected="selected">Pilih Provinsi</option>
+      </select>
+      <br>
+      <select onchange="submit()" name="opttwo" id="fieldSel" size="1">
+        <option value="" selected="selected">Pilih kota</option>
+      </select>
+      <br><br>
+      <p id="hasil" style="border: 2px solid rgb(84, 203, 207); display:inline">Output</p>
+      <br>
+      <button onclick="myFunction()">Change Dark/Light Mode</button>
+  </div>
+  </body>
+</html>
